@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::prefix('/venda')->name('.venda')->group(function(){
+Route::prefix('/venda')->name('venda.')->group(function(){
     Route::get('/nova', 'VendaController@novaVenda')->name('venda');
+});
+
+Route::prefix('/produto')->name('produto.')->group(function(){
+    Route::get('/pesquisa/{inputPesquisa}', 'ProdutoController@pesquisarProduto')->name('pesquisa');
 });

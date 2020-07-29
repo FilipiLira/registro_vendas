@@ -1,0 +1,15 @@
+.conteudo_pesquisa{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 5px #c7c6c6;
+}
+
+.produto-pesquisa{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.produto-pesquisa:hover{
+    background-color: rgb(192, 189, 189);
+}
