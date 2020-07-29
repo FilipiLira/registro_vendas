@@ -17,10 +17,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::prefix('/venda')->name('venda.')->group(function(){
-    Route::get('/nova', 'VendaController@novaVenda')->name('venda');
+Route::prefix('/vendas')->name('vendas.')->group(function(){
+    Route::get('/inicio', 'SaleController@inicio')->name('inicio');
+    Route::post('/nova', 'SaleController@novaVendaForm')->name('nova');
 });
 
 Route::prefix('/produto')->name('produto.')->group(function(){
-    Route::get('/pesquisa/{inputPesquisa}', 'ProdutoController@pesquisarProduto')->name('pesquisa');
+    Route::get('/pesquisa/{inputPesquisa}', 'ProductController@pesquisarProduto')->name('pesquisa');
+});
+
+Route::prefix('/fornecedor')->name('fornecedor.')->group(function(){
+    Route::get('/todos', 'ProviderController@fornecedoresTodos')->name('todos');
 });

@@ -14,7 +14,7 @@ function pesquisa(pesquisa) {
         },
 
         success: (data) => {
-            $(pesquisa).attr('typeInput') == 'produto' ? contPesquisa = pesquisa_produto : ''
+            $(pesquisa).attr('typeInput') == 'produto' ? contPesquisa = pesquisa_produto_container : ''
             $(pesquisa).attr('typeInput') == 'produto' ? inputHiddenVenda = produto_venda : ''
             console.log(data)
             $(contPesquisa).html('')
@@ -28,6 +28,8 @@ function pesquisa(pesquisa) {
                 $(produtoPesq).on('click', () => {
                     $(pesquisa).val($(produtoPesq).html())
                     $(produto_venda).val($(produtoPesq).attr('id'))
+
+                    $('#pesquisa_produto_container').fadeOut(200)
                 })
             })
         }
@@ -38,8 +40,3 @@ $('#pesquisa_produto').keydown(function () {
     pesquisa(this)
 })
 
-$(document).ready(function () {
-    
-    $('#fornecedor').multiselect();
-    
-});
