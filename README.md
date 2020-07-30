@@ -9,5 +9,13 @@
 
 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Para o desenvolvimento deste projeto foi utilizado o framework Laravel. 
+Para testar o sistema será preciso acompanhar os seguintes paços:
+*Realizar download do projeto a partir deste repositório.
+*Criar a base de dados com nome 'registrovendas'.
+*Execultar o comando 'php artisan migrate' para que o Laravel crie as tabelas no DB.
+*Execultar o comando 'php artisan serve' para iniciar o servidor na porta 8000.
+*Acessar a rota '/vendas/inicio' para ter acesso a tela inicial do sistema.
+
+obs: para realizar testes, recomendo inserir registros de teste nas tabelas 'products' e 'providers'
 
