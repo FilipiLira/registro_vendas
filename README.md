@@ -10,12 +10,12 @@
 
 
 Para o desenvolvimento deste projeto foi utilizado o framework Laravel. 
-Para testar o sistema será preciso acompanhar os seguintes paços:
-*Realizar download do projeto a partir deste repositório.
-*Criar a base de dados com nome 'registrovendas'.
-*Execultar o comando 'php artisan migrate' para que o Laravel crie as tabelas no DB.
-*Execultar o comando 'php artisan serve' para iniciar o servidor na porta 8000.
-*Acessar a rota '/vendas/inicio' para ter acesso a tela inicial do sistema.
+<p>Para testar o sistema será preciso acompanhar os seguintes paços:</p>
+<p>*Realizar download do projeto a partir deste repositório.</p>
+<p>*Criar a base de dados com nome 'registrovendas'.</p>
+<p>*Execultar o comando 'php artisan migrate' para que o Laravel crie as tabelas no DB.</p>
+<p>*Execultar o comando 'php artisan serve' para iniciar o servidor na porta 8000.</p>
+<p>*Acessar a rota '/vendas/inicio' para ter acesso a tela inicial do sistema.</p>
 
-obs: para realizar testes, recomendo inserir registros de teste nas tabelas 'products' e 'providers'
+<p>obs: para realizar testes, recomendo inserir registros de teste nas tabelas 'products' e 'providers'</p>
 
