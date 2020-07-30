@@ -7,9 +7,8 @@ class SaleRepository
    public function todasVendas(){
          $vendas = \App\Sale::join('products', 'sales.product_id', 'products.id')
                               ->join('sales_providers', 'sales.id', 'sales_providers.sale_id')
-                              ->join('providers', 'sales_providers.provider_id', 'providers.id')
                               ->join('delivery_adresses', 'sales.delivery_id', 'delivery_adresses.id')
-                              ->select('products.*', 'sales.sale_date', 'providers.name as providerName', 'delivery_adresses.*' )->get();
+                              ->select('products.*', 'sales.sale_date', 'delivery_adresses.*' )->distinct()->get();
         
          $vendasArray = [];
          $arrayTemp = [];

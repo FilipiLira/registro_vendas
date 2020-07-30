@@ -27,13 +27,16 @@ class SaleController extends Controller
 
         $produto = \App\Product::find($produtoReq);
         $fornecedor = \App\Provider::find($fornecedorReq);
+        $saleR = new SaleRepository;
+        $vendas = $saleR->todasVendas();
 
-        // $total = 0;
-        // foreach ($produto as $value) {
-        //     $total = $total + $value->price;
-        // }
+        $total = 0;
         
-        return view('forms.venda', compact('produto', 'fornecedor'));
+        foreach ($vendas as $value) {
+            $total = $total + $value['venda']->price;
+        }
+        
+        return view('forms.venda', compact('produto', 'fornecedor', 'vendas', 'total'));
     }
 
     public function cadastroVenda(Request $req, SaleRepository $saleR){

@@ -8,11 +8,20 @@
             <h3 class="pt-4">Nova venda</h3>
             <form id="form-venda" method="post" action="{{ route('vendas.nova') }}" style="padding: 50px">
                 @csrf
-                <div class="form-group">
-                    <input class="form-control" type="search" id="pesquisa_produto" typeInput='produto' url=" {{ route('produto.pesquisa', 'atri') }} " name="pesquisa_produto" placeholder="Pesquisar produto">
-                    <input type="hidden" id="produto_venda" name="produto_venda">
-                    <div id="pesquisa_produto_container" class="conteudo_pesquisa">
-                           
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <input class="form-control" type="search" id="pesquisa_produto" typeInput='produto_nome' url=" {{ route('produto.pesquisa', 'atri') }} " name="pesquisa_produto" placeholder="Pesquisar produto por nome...">
+                        <input type="hidden" id="produto_venda" name="produto_venda">
+                        <div id="pesquisa_produto_container" class="conteudo_pesquisa">
+                               
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <input class="form-control" type="search" id="pesquisa_produto_referencia" typeInput='produto_referencia' url=" {{ route('produto.pesquisa', 'atri') }} " name="pesquisa_produto_referencia" placeholder="Pesquisar produto por referência...">
+                        <input type="hidden" id="produto_venda_referencia" name="produto_venda_referencia">
+                        <div id="pesquisa_produto_container_referencia" class="conteudo_pesquisa">
+                               
+                        </div>
                     </div>
                 </div>
 
@@ -75,6 +84,7 @@
                     </div>
                  </div>
                  <button id="cadastrar" class="btn btn-success mb-3">Cadastrar</button>
+                 <a href="{{route('vendas.inicio')}}" class="btn mb-3">Cancelar</a>
             </form>
         
         @endif
@@ -100,7 +110,7 @@
                                 <td>R${{$venda['venda']->price}},00</td>
                                 <td>
                                 @foreach ($venda['fornecedores'] as $key => $item)
-                                    @if (!$key == count($venda['fornecedores']) && count($venda['fornecedores']) > 1 )
+                                    @if ($key != (count($venda['fornecedores']) -1) && count($venda['fornecedores']) > 1 )
                                        {{$item->name}} <span>|</span>
                                     @else
                                        {{$item->name}}
@@ -121,16 +131,12 @@
                        @endforeach
                    @endif
                 </tbody>
-                <tfoot>
+                <tfoot id="tabelaRodape">
                     <tr scope="row" colspan="3">
                         <td>Total: R${{$total}},00</td>
                     </tr>
                 </tfoot>
             </table>
-
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-              </button>
               
               <!-- Modal -->
               <div class="custon-modal" id="modal" >

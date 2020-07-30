@@ -1,9 +1,10 @@
 $('#continuar').on('click', (e) => {
     e.preventDefault()
     let produto = $('#pesquisa_produto').val()
+    let referencia = $('#pesquisa_produto_referencia').val()
     let fornecedor = $('#fornecedor').val()
 
-    if (produto != '' && fornecedor != '') {
+    if ((produto != '' || referencia != '') && fornecedor != '') {
         $('#form-venda').submit()
     }
 })
@@ -24,7 +25,6 @@ $(document).ready(function () {
             data.forEach((fornecedor) => {
                 $('#fornecedor').append(`<option value="${fornecedor.id}">${fornecedor.name}</option>`)
             })
-            console.log(data)
         }
     })
 
@@ -74,59 +74,70 @@ $('#cadastrar').on('click', (e) => {
         },
 
         success: (data) => {
-           
-            console.log(data)
+
+            let total = 0
+
             let linhaTabela = ''
             data.forEach(elem => {
+                total = total + elem['venda'].price
                 linhaTabela += `
                     <tr idTr="${elem['venda'].id}" class="linhas-tabela">
                         <td>${elem['venda'].id}</td>
                         <td>${elem['venda'].name}</td>
-                        <td>${elem['venda'].price}</td>
+                        <td>R$${elem['venda'].price},00</td>
                 `
-                elem['fornecedores'].forEach((elem2, i) => {
-                    linhaTabela += `
+                linhaTabela += `
                         <td>`
-                       
-                    if (!i == elem['fornecedores'].length && elem['fornecedores'].length > 1 ){
-                       linhaTabela += `${elem2.name} <span>|</span>` 
+
+                elem['fornecedores'].forEach((elem2, i) => {
+                    
+                    // if(i == elem['fornecedores'].length){
+                    //     console.log('igual')
+                    // }
+                    if ((i != (elem['fornecedores'].length - 1)) && (elem['fornecedores'].length > 1)) {
+                        linhaTabela += `${elem2.name} <span>| </span>`
                     } else {
                         linhaTabela += `${elem2.name}`
                     }
-                               
-                            
-                    linhaTabela += `
-                        </td>`
 
-                    linhaTabela += `
-                            <td>
-                                <button idBtn="${elem['venda'].id}" class="btn btn-primary modal-btn" data-toggle="modal" data-target="modal"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                            </td>
-                            <input type="hidden" name="" value="${elem['venda'].postal_code}">
-                            <input type="hidden" name="" value="${elem['venda'].city}">
-                            <input type="hidden" name="" value="${elem['venda'].neighborhood}">
-                            <input type="hidden" name="" value="${elem['venda'].uf}">
-                            <input type="hidden" name="" value="${elem['venda'].street}">
-                            <input type="hidden" name="" value="${elem['venda'].reference}">
-                        </tr>
-                    `
-                    
                 })
+                linhaTabela += `
+                </td>`
+
+                linhaTabela += `
+                    <td>
+                        <button idBtn="${elem['venda'].id}" class="btn btn-primary modal-btn" data-toggle="modal" data-target="modal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </td>
+                    <input type="hidden" name="" value="${elem['venda'].postal_code}">
+                    <input type="hidden" name="" value="${elem['venda'].city}">
+                    <input type="hidden" name="" value="${elem['venda'].neighborhood}">
+                    <input type="hidden" name="" value="${elem['venda'].uf}">
+                    <input type="hidden" name="" value="${elem['venda'].street}">
+                    <input type="hidden" name="" value="${elem['venda'].reference}">
+                </tr>
+            `
             })
 
+            let totalString = `
+                <tr scope="row" colspan="3">
+                    <td>Total: R$${total},00</td>
+                </tr>
+            `
+
             $('#bodyTabela').html(linhaTabela)
+            $('#tabelaRodape').html(totalString)
 
             $('.modal-btn').each((i, elem) => {
                 let idBtn = $(elem).attr('idBtn')
-            
+
                 $(elem).on('click', () => {
-            
+
                     $('.linhas-tabela').each((i, linha) => {
                         let idTr = $(linha).attr('idTr')
-            
+
                         if (idBtn == idTr) {
                             console.log('igual')
-            
+
                             let filhos = $(linha).children()
                             let nome = $(filhos[1]).html()
                             let preco = $(filhos[2]).html()
@@ -138,7 +149,7 @@ $('#cadastrar').on('click', (e) => {
                             let rua = $(filhos[9]).val()
                             let referencia = $(filhos[10]).val()
                             console.log(fornecedor)
-            
+
                             let conteudoModal = `
                                    <h5>Produto</h5>
                                    <hr/>
@@ -186,13 +197,13 @@ $('#cadastrar').on('click', (e) => {
                             $('.modal-body').html(conteudoModal)
                         }
                     })
-            
+
                     $('#modal').fadeIn(200)
-                    
+
                 })
             })
-            
-            $('.close').on('click', ( ) => {
+
+            $('.close').on('click', () => {
                 $('#modal').fadeOut(200)
             })
         }

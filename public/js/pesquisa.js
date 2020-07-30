@@ -6,6 +6,10 @@ function pesquisa(pesquisa) {
 
     url = `${urlArray.join('/')}/${inputVal}`
 
+    let tipo = $(pesquisa).attr('typeInput')
+
+    let data = [inputVal, tipo]
+
     $.ajax({
         url: url,
         type: 'get',
@@ -14,8 +18,12 @@ function pesquisa(pesquisa) {
         },
 
         success: (data) => {
-            $(pesquisa).attr('typeInput') == 'produto' ? contPesquisa = pesquisa_produto_container : ''
-            $(pesquisa).attr('typeInput') == 'produto' ? inputHiddenVenda = produto_venda : ''
+            $(pesquisa).attr('typeInput') == 'produto_nome' ? contPesquisa = pesquisa_produto_container : ''
+            $(pesquisa).attr('typeInput') == 'produto_nome' ? inputHiddenVenda = produto_venda : ''
+
+            $(pesquisa).attr('typeInput') == 'produto_referencia' ? contPesquisa = pesquisa_produto_container_referencia : ''
+            $(pesquisa).attr('typeInput') == 'produto_referencia' ? inputHiddenVenda = 'produto_venda_referencia' : ''
+
             console.log(data)
             $(contPesquisa).html('')
 
@@ -30,13 +38,19 @@ function pesquisa(pesquisa) {
                     $(produto_venda).val($(produtoPesq).attr('id'))
 
                     $('#pesquisa_produto_container').fadeOut(200)
+                    $('#pesquisa_produto_container_referencia').fadeOut(200)
                 })
             })
+            
         }
     })
 
 }
-$('#pesquisa_produto').keydown(function () {
+$('#pesquisa_produto').keyup(function () {
     pesquisa(this)
+})
+
+$('#pesquisa_produto_referencia').keyup(function () {
+   pesquisa(this)
 })
 
