@@ -17,12 +17,11 @@ class CreateSales extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id')->nullable(false);
             $table->unsignedBigInteger('delivery_id')->nullable(false);
-            $table->unsignedBigInteger('provider_id')->nullable(false);
+            $table->date('sale_date')->nullable(false);
 
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('delivery_id')->references('id')->on('delivery_adresses');
-            $table->foreign('provider_id')->references('id')->on('providers');
         });
     }
 

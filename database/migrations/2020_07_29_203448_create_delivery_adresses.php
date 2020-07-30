@@ -15,16 +15,13 @@ class CreateDeliveryAdresses extends Migration
     {
         Schema::create('delivery_adresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id')->nullable(false);
             $table->string('uf', 20)->nullable(false);
             $table->string('city',255)->nullable(false);
             $table->string('neighborhood', 255)->nullable(false);
-            $table->string('street'. 255)->nullable(false);
+            $table->string('street', 255)->nullable(false);
             $table->string('number', 20);
             $table->string('postal_code', 10);
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

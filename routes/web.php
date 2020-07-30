@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/vendas')->name('vendas.')->group(function(){
     Route::get('/inicio', 'SaleController@inicio')->name('inicio');
     Route::post('/nova', 'SaleController@novaVendaForm')->name('nova');
+    Route::post('/nova/cadastro', 'SaleController@cadastroVenda')->name('cadastro');
 });
 
 Route::prefix('/produto')->name('produto.')->group(function(){
@@ -29,3 +30,4 @@ Route::prefix('/produto')->name('produto.')->group(function(){
 Route::prefix('/fornecedor')->name('fornecedor.')->group(function(){
     Route::get('/todos', 'ProviderController@fornecedoresTodos')->name('todos');
 });
+
