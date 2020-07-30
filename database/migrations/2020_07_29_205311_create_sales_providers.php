@@ -15,8 +15,8 @@ class CreateSalesProviders extends Migration
     {
         Schema::create('sales_providers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('provider_id');
-            $table->unsignedBigInteger('sale_id');
+            $table->unsignedBigInteger('provider_id')->nullable(false);
+            $table->unsignedBigInteger('sale_id')->nullable(false);
             $table->timestamps();
 
             $table->foreign('provider_id')->references('id')->on('providers');

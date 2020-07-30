@@ -15,7 +15,7 @@ class CreateProviders extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
+            $table->string('name', 255)->nullable(false);
             $table->timestamps();
         });
     }

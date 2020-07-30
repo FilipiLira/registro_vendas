@@ -20,7 +20,7 @@ function pesquisa(pesquisa) {
             $(contPesquisa).html('')
 
             data.forEach(produto => {
-                let rowProduto = `<div class="produto-pesquisa" id="${produto.id}">${produto.nome}</div>`
+                let rowProduto = `<div class="produto-pesquisa" id="${produto.id}">${produto.name}</div>`
                 $(contPesquisa).append(rowProduto)
             });
 

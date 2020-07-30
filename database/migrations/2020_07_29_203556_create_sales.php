@@ -15,9 +15,9 @@ class CreateSales extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('delivery_id');
-            $table->unsignedBigInteger('provider_id');
+            $table->unsignedBigInteger('product_id')->nullable(false);
+            $table->unsignedBigInteger('delivery_id')->nullable(false);
+            $table->unsignedBigInteger('provider_id')->nullable(false);
 
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');

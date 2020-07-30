@@ -11,11 +11,13 @@ class SaleController extends Controller
     }
 
     public function novaVendaForm(Request $req){
-        $produto = $req->produto_venda;
-        $fornecedor = $req->fornecedor;
+        $produtoReq = $req->produto_venda;
+        $fornecedorReq = $req->fornecedor;
 
-        var_dump($fornecedor);
-        die;
-        return view('forms.venda');
+        $produto = \App\Product::find($produtoReq);
+        $fornecedor = \App\Provider::find($fornecedorReq);
+
+        
+        return view('forms.venda', compact('produto', 'fornecedor'));
     }
 }

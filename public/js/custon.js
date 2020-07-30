@@ -20,13 +20,11 @@ $(document).ready(function () {
         type: 'get',
 
         success: (data) => {
-            // let res = JSON.parse(data)
-            // $('.likeContSpan').each((i, elem) => {
-            //     if ($(elem).attr('idPost') == res.postId) {
-            //         $(elem).html(res.likes)
-            //     }
-            // })
-            console.log(JSON.parse(data))
+            
+            data.forEach(( fornecedor ) => {
+                $('#fornecedor').append(`<option value="${fornecedor.id}">${fornecedor.name}</option>`)
+            })
+            console.log(data)
         }
     })
 })

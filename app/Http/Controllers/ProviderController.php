@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class ProviderController extends Controller
 {
     function fornecedoresTodos(){
-        $fornecedores = \App\Fornecedor::all();
+        $fornecedores = \App\Provider::all();
 
-        return 'ss';
+        return $fornecedores;
     }
 }

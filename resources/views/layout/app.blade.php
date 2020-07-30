@@ -44,5 +44,6 @@
     <script src="{{ asset('js/pesquisa.js') }}"></script>
     <script src="{{ asset('js/select.js') }}"></script>
     <script src="{{ asset('js/custon.js') }}"></script>
+    <script src="{{ asset('js/viaCep.js') }}"></script>
 </body>
 </html>
