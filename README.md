@@ -10,7 +10,7 @@
 
 
 Para o desenvolvimento deste projeto foi utilizado o framework Laravel. 
-<p>Para testar o sistema será preciso acompanhar os seguintes paços:</p>
+<p>Para testar o sistema será preciso acompanhar os seguintes passos:</p>
 <p>*Realizar download do projeto a partir deste repositório.</p>
 <p>*Criar a base de dados com nome 'registrovendas'.</p>
 <p>*Execultar o comando 'php artisan migrate' para que o Laravel crie as tabelas no DB.</p>
