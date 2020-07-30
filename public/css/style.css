@@ -13,3 +13,15 @@
 .produto-pesquisa:hover{
     background-color: rgb(192, 189, 189);
 }
+
+.custon-modal{
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+}

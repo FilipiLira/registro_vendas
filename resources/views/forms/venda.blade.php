@@ -28,7 +28,7 @@
             
         @else
          
-            <form action="{{ route('vendas.cadastro') }}" method="post" style="padding: 50px 70px">
+            <form id="ss" action="{{ route('vendas.cadastro') }}" method="post" style="padding: 50px 70px">
                  @csrf
                  <h4 class="title">Dados do produto</h4>
                  <hr/>
@@ -36,8 +36,8 @@
                      <div class="form-group col-lg-6">
                          <label for="my-input">Produto</label>
                          <p>{{$produto->name}}</p>
-                         <input type="hidden" name="produto" value="{{$produto->id}}">
-                         <input type="hidden" name="fornecedor" value="{{$fornecedor}}">
+                         <input id="produto" type="hidden" name="produto" value="{{$produto->id}}">
+                         <input id="fornecedor" type="hidden" name="fornecedor" value="{{$fornecedor}}">
                       </div>
                       <div class="form-group col-lg-6">
                           <label for="data">Data da venda</label>
@@ -80,15 +80,74 @@
         @endif
 
             <table class="table table-dark">
-                <tbody>
+                <thead>
                     <tr>
-                        <td>Produto</td>
-                        <td>Preço</td>
-                        <td>Fornecedor(es)</td>
+                        <th>Item</th>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                        <th>Fornecedor(es)</th>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody id="bodyTabela">
+
+                   @if (isset($vendas))
+                       @foreach ($vendas as $venda)
+                        
+                            <tr scope="row" idTr="{{$venda['venda']->id}}" class="linhas-tabela">
+                                <td>{{$venda['venda']->id}}</td>
+                                <td>{{$venda['venda']->name}}</td>
+                                <td>R${{$venda['venda']->price}},00</td>
+                                <td>
+                                @foreach ($venda['fornecedores'] as $key => $item)
+                                    @if (!$key == count($venda['fornecedores']) && count($venda['fornecedores']) > 1 )
+                                       {{$item->name}} <span>|</span>
+                                    @else
+                                       {{$item->name}}
+                                    @endif
+                                @endforeach
+                                </td>
+                                <td>
+                                    <button idBtn="{{$venda['venda']->id}}" class="btn btn-primary modal-btn" data-toggle="modal" data-target="modal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                </td>
+                                <input type="hidden" name="" value="{{$venda['venda']->postal_code}}">
+                                <input type="hidden" name="" value="{{$venda['venda']->city}}">
+                                <input type="hidden" name="" value="{{$venda['venda']->neighborhood}}">
+                                <input type="hidden" name="" value="{{$venda['venda']->uf}}">
+                                <input type="hidden" name="" value="{{$venda['venda']->street}}">
+                                <input type="hidden" name="" value="{{$venda['venda']->reference}}">
+                            </tr>
+                          
+                       @endforeach
+                   @endif
                 </tbody>
+                <tfoot>
+                    <tr scope="row" colspan="3">
+                        <td>Total: R${{$total}},00</td>
+                    </tr>
+                </tfoot>
             </table>
 
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+              </button>
+              
+              <!-- Modal -->
+              <div class="custon-modal" id="modal" >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Dados da venda</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
        </div>
     </div>
 @endsection

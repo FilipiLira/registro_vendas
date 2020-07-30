@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Http\Services\SaleRepository;
+
 
 class SaleController extends Controller
 {
     public function inicio(){
-        return view('forms.venda');
+
+        $saleR = new SaleRepository;
+        $vendas = $saleR->todasVendas();
+
+        $total = 0;
+        foreach ($vendas as $value) {
+            $total = $total + $value['venda']->price;
+        }
+
+        return view('forms.venda', compact('vendas', 'total'));
     }
 
     public function novaVendaForm(Request $req){
@@ -17,11 +28,15 @@ class SaleController extends Controller
         $produto = \App\Product::find($produtoReq);
         $fornecedor = \App\Provider::find($fornecedorReq);
 
+        // $total = 0;
+        // foreach ($produto as $value) {
+        //     $total = $total + $value->price;
+        // }
         
         return view('forms.venda', compact('produto', 'fornecedor'));
     }
 
-    public function cadastroVenda(Request $req){
+    public function cadastroVenda(Request $req, SaleRepository $saleR){
         
         $endereco = \App\DeliveryAdresse::create([
             'uf' => $req->uf,
@@ -38,17 +53,25 @@ class SaleController extends Controller
             'sale_date' => $req->data
         ]);
 
-        var_dump($req->fornecedor);
-        die;
+        $fornecedorArray = json_decode($req->fornecedor);
 
-        foreach ($req->fornecedor as $fornecedor) {
+        // var_dump($fornecedor[0]->id);
+        // die;
+
+        foreach ($fornecedorArray as $fornecedor) {
+            // var_dump($fornecedor);
+            // die;
             \App\SalesProvider::create([
-                'provider_id' => $fornecedor,
+                'provider_id' => $fornecedor->id,
                 'sale_id' => $venda->id
             ]);
         
         }
 
-        return 'cadastrou';
+        $saleR = new SaleRepository;
+        $vendas = $saleR->todasVendas();
+
+        
+        return $vendas;
     }
 }
