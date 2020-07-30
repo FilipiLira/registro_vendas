@@ -17,5 +17,6 @@ Para o desenvolvimento deste projeto foi utilizado o framework Laravel.
 <p><i>*Execultar o comando 'php artisan serve' para iniciar o servidor na porta 8000.</i></p>
 <p><i>*Acessar a rota '/vendas/inicio' para ter acesso a tela inicial do sistema.</i></p>
 
-<p>obs: para realizar testes, recomendo inserir registros de teste nas tabelas 'products' e 'providers'</p>
+<p>obs: para realizar testes, recomendo inserir registros de teste nas tabelas 'products' e 'providers'.</p>
+<p>O modelo relacional pode ser encontrado na pasta 'database/modeloRelacional' com o nome 'modelo_registroVendas.png.mwb'</p>
 
